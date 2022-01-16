@@ -1,3 +1,4 @@
+import noinjectedprovider from "./noinjectedprovider";
 import injected from "./injected";
 import walletconnect from "./walletconnect";
 import portis from "./portis";
@@ -14,6 +15,7 @@ import binancechainwallet from "./binancechainwallet";
 import walletlink from "./walletlink";
 
 export {
+  noinjectedprovider,
   injected,
   walletconnect,
   portis,

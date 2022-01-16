@@ -8,6 +8,7 @@ export interface IProviderControllerOptions {
   cacheProvider: boolean;
   providerOptions: IProviderOptions;
   network: string;
+  displayNoInjectedProvider: boolean;
 }
 
 export interface IAbstractConnectorOptions {

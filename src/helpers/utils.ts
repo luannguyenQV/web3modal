@@ -146,6 +146,9 @@ export function getProviderDescription(
     case "hardware":
       description = `Connect to your ${providerInfo.name} Hardware Wallet`;
       break;
+    case "noinjected":
+      description = `Click here to add MetaMask wallet`
+      break;
     default:
       break;
   }

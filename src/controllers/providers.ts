@@ -3,7 +3,8 @@ import {
   CONNECT_EVENT,
   ERROR_EVENT,
   INJECTED_PROVIDER_ID,
-  CACHED_PROVIDER_KEY
+  CACHED_PROVIDER_KEY,
+  NO_INJECTED_PROVIDER
 } from "../constants";
 import {
   isMobile,
@@ -27,7 +28,7 @@ export class ProviderController {
   public cachedProvider: string = "";
   public shouldCacheProvider: boolean = false;
   public disableInjectedProvider: boolean = false;
-
+  public displayNoInjectedProvider: boolean = true;
   private eventController: EventController = new EventController();
   private injectedProvider: IProviderInfo | null = null;
   private providers: IProviderDisplayWithConnector[] = [];
@@ -41,7 +42,7 @@ export class ProviderController {
     this.shouldCacheProvider = opts.cacheProvider;
     this.providerOptions = opts.providerOptions;
     this.network = opts.network;
-
+    this.displayNoInjectedProvider = opts.displayNoInjectedProvider;
     this.injectedProvider = getInjectedProvider();
 
     this.providers = Object.keys(list.connectors).map((id: string) => {
@@ -118,6 +119,13 @@ export class ProviderController {
     return false;
   }
 
+  public shouldDisplayNoInjectedProvider = () => {
+    const displayInjected =
+       !!this.injectedProvider && !this.disableInjectedProvider;
+
+    return displayInjected == false && !!this.displayNoInjectedProvider;
+  }
+
   public getUserOptions = () => {
     const mobile = isMobile();
 
@@ -129,15 +137,19 @@ export class ProviderController {
 
     const providerList = [];
 
+    const displayNoInjectedProvider = this.shouldDisplayNoInjectedProvider();
+
     if (onlyInjected) {
       providerList.push(INJECTED_PROVIDER_ID);
     } else {
       if (displayInjected) {
         providerList.push(INJECTED_PROVIDER_ID);
+      } else if (displayNoInjectedProvider) {
+        providerList.push(NO_INJECTED_PROVIDER);
       }
 
       defaultProviderList.forEach((id: string) => {
-        if (id !== INJECTED_PROVIDER_ID) {
+        if (id !== INJECTED_PROVIDER_ID && id !== NO_INJECTED_PROVIDER) {
           const result = this.shouldDisplayProvider(id);
           if (result) {
             providerList.push(id);

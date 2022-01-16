@@ -24,10 +24,20 @@ import FrameLogo from "../logos/frame.svg";
 import BinanceChainWalletLogo from "../logos/binancechainwallet.svg";
 // @ts-ignore
 import WalletLinkLogo from "../logos/walletlink.svg";
+// @ts-ignore
+import MetaMaskLogo from "../logos/metamask.svg";
 
 import { IProviderInfo } from "../../helpers";
 
 export * from "../injected";
+
+export const NOINDEXEDPROVIDER: IProviderInfo = {
+  id: "noinjectedprovider",
+  name: "Install MetaMask",
+  logo: MetaMaskLogo,
+  type: "noinjected",
+  check: "returnTrue"
+};
 
 export const WALLETCONNECT: IProviderInfo = {
   id: "walletconnect",

@@ -26,7 +26,8 @@ const defaultOpts: ICoreOptions = {
   cacheProvider: false,
   disableInjectedProvider: false,
   providerOptions: {},
-  network: ""
+  network: "",
+  displayNoInjectedProvider: true
 };
 
 export class Core {
@@ -50,7 +51,8 @@ export class Core {
       disableInjectedProvider: options.disableInjectedProvider,
       cacheProvider: options.cacheProvider,
       providerOptions: options.providerOptions,
-      network: options.network
+      network: options.network,
+      displayNoInjectedProvider: options.displayNoInjectedProvider
     });
 
     this.providerController.on(CONNECT_EVENT, provider =>
